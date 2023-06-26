@@ -2,14 +2,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import "../css_modules/contact.module.css";
 import {base_url, characters, defaultHero, navItems, period_month} from "../utils/constants";
 import {withRedirectToError} from "../hoc/withRedirectToError";
+import {withHeroId} from "../hoc/withHeroId";
 
 const Contact = () => {
 
     const [planets, setPlanets] = useState(['wait...']);
 
     const fillPlanets = async (url: string) => {
-
-
         const response = await fetch(url);
         const json: Array<{name: string}> = await response.json();
         const planets = json.map(item => item.name);
@@ -55,4 +54,4 @@ const Contact = () => {
     )
 }
 
-export default withRedirectToError(navItems[3].route)(Contact);
+export default withHeroId(navItems[3].route)(Contact);

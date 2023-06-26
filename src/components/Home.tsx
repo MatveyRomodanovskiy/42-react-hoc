@@ -18,4 +18,4 @@ const Home = () => {
     );
 };
 
-export default withRedirectToError(navItems[0].route)(Home);
+export default withHeroId(navItems[0].route)(Home);

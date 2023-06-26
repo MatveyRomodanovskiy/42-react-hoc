@@ -7,9 +7,6 @@ import {withHeroId} from "../hoc/withHeroId";
 import {withRedirectToError} from "../hoc/withRedirectToError";
 
 const StarWars = () => {
-    const {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext);
-    const navigate = useNavigate();
     return (
         <div className={style.farGalaxy}>
             <p>{starWarsInfo}</p>
@@ -17,4 +14,4 @@ const StarWars = () => {
     );
 };
 
-export default withRedirectToError(navItems[2].route)(StarWars);
+export default withHeroId(navItems[2].route)(StarWars);

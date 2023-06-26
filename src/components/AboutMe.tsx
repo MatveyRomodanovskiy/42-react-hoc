@@ -6,15 +6,15 @@ import {useNavigate, useParams} from "react-router-dom";
 import {SWContext} from "../utils/context";
 import {withHeroId} from "../hoc/withHeroId";
 import {withRedirectToError} from "../hoc/withRedirectToError";
+interface Props {
+    heroId: string
+}
 
-const AboutMe = () => {
+const AboutMe = ({heroId}: Props) => {
     const [hero, setHero] = useState<HeroInfo>();
-
-    const {heroId = defaultHero} = useParams();
 
     useEffect(() => {
 
-        if (characters[heroId]) {
             const hero = JSON.parse(localStorage.getItem(heroId)!);
             if (hero && ((Date.now() - hero.time) < period_month)) {
                 setHero(hero.payload);
@@ -40,7 +40,7 @@ const AboutMe = () => {
                         localStorage.setItem(heroId, JSON.stringify(info));
                     });
             }
-        }
+
     }, [heroId])
 
     return (
@@ -61,4 +61,4 @@ const AboutMe = () => {
     )
 }
 
-export default withRedirectToError(navItems[1].route)(AboutMe)
+export default withHeroId(navItems[1].route)(AboutMe)
